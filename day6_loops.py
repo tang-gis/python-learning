@@ -15,7 +15,7 @@ for v in ndvi_row:
 avg = total / count
 print(f"该行共 {count} 个像元，NDVI 均值 {avg:.2f}")
 # 第二步：循环套条件，数出植被稀疏的像元（NDVI < 0.4）
-low=1   #归零只做一次：写在循环外 = 循环开始前归一次零
+low=0   #归零只做一次：写在循环外 = 循环开始前归一次零
 for v in ndvi_row:
     if v < 0.4:          # Day 5 的 if 搬进循环：逐个筛查
         low += 1
@@ -24,11 +24,11 @@ print(f"植被稀疏像元（NDVI<0.4）共 {low} 个")
 
 # 给 1~20 号监测桩自动生成编号牌，7 号之后每 3 个抽检一次
 for i in range(1, 21):            # 含头不含尾：产生 1~20，没有 21
-  tag = f"JC-{i:02d}"     
-if i > 7 and i % 3 == 0:          # 编号大于 7 且能被 3 整除 → 抽检
-     print(f"{tag} → 抽检桩")
-else:
-    print(f"{tag} → 常规桩")
+    tag = f"JC-{i:02d}"
+    if i > 7 and i % 3 == 0:      # 编号大于 7 且能被 3 整除 → 抽检
+        print(f"{tag} → 抽检桩")
+    else:
+        print(f"{tag} → 常规桩")
 
 # 某小流域年土壤侵蚀模数 50（t/km²·a，示例值），
 # 每年治理后降为原来的 70%，降到 10 以下算达标——要几年？
